@@ -1,89 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Diet Plans</title>
-  <link rel="stylesheet" href="style.css" />
-   <style>
 
-   .back-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, sans-serif;
+    }
 
-  width: 45px;
-  height: 45px;
+    body{
+      background: linear-gradient(135deg,#111,#1c1c1c,#2b0000);
+      color:white;
+      min-height:100vh;
+      padding:30px;
+    }
 
-  background: #e60000;   /* bright red */
-  color: white;
-  border: none;
+    /* Back Button */
+    .back-btn{
+      position: fixed;
+      top: 20px;
+      left: 20px;
 
-  border-radius: 50%;
-  cursor: pointer;
+      width: 45px;
+      height: 45px;
 
-  font-size: 20px;
-  font-weight: bold;
+      background: #ff1a1a;
+      color: white;
+      border: none;
+      border-radius: 50%;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+      font-size: 22px;
+      cursor: pointer;
 
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-  z-index: 9999;
-}
+      box-shadow: 0 0 15px rgba(255,0,0,0.7);
+      transition: 0.3s;
+      z-index:999;
+    }
+
+    .back-btn:hover{
+      transform: scale(1.1);
+      background:#ff3333;
+    }
+
+    /* Heading */
+    .main-heading{
+      text-align:center;
+      margin-bottom:40px;
+    }
+
+    .main-heading h1{
+      font-size:42px;
+      color:#ff4d4d;
+      margin-bottom:10px;
+    }
+
+    .main-heading p{
+      color:#ccc;
+      font-size:18px;
+    }
+
+    /* Cards */
+    .diet-container{
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+      gap:30px;
+    }
+
+    .diet-card{
+      background: rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.1);
+
+      border-radius:20px;
+      padding:25px;
+
+      backdrop-filter: blur(10px);
+
+      transition:0.4s;
+      box-shadow:0 0 20px rgba(0,0,0,0.3);
+    }
+
+    .diet-card:hover{
+      transform: translateY(-10px);
+      box-shadow:0 0 25px rgba(255,0,0,0.4);
+    }
+
+    .diet-card h2{
+      color:#ff4d4d;
+      margin-bottom:20px;
+      font-size:28px;
+      text-align:center;
+    }
+
+    .diet-card ul{
+      list-style:none;
+    }
+
+    .diet-card li{
+      background: rgba(255,255,255,0.05);
+      margin-bottom:12px;
+      padding:12px;
+      border-radius:10px;
+      line-height:1.5;
+      transition:0.3s;
+    }
+
+    .diet-card li:hover{
+      background: rgba(255,0,0,0.15);
+    }
+
+    /* Responsive */
+    @media(max-width:768px){
+
+      body{
+        padding:20px;
+      }
+
+      .main-heading h1{
+        font-size:32px;
+      }
+
+      .main-heading p{
+        font-size:15px;
+      }
+    }
+
   </style>
 </head>
+
 <body>
-<button class="back-btn" onclick="goBack('dashboard.html')">←</button>
+
+  <!-- Back Button -->
+  <button class="back-btn" onclick="goBack('dashboard.html')">←</button>
+
+  <!-- Login Check -->
   <script>
     if (localStorage.getItem('isLoggedIn') !== 'true') {
       alert('Please login first!');
       window.location.href = 'login.html';
     }
   </script>
-<script>
-  function goBack(defaultPage) {
-    if (document.referrer && document.referrer !== "") {
-      window.history.back();
-    } else {
-      window.location.href = defaultPage;
+
+  <!-- Back Function -->
+  <script>
+    function goBack(defaultPage) {
+      if (document.referrer && document.referrer !== "") {
+        window.history.back();
+      } else {
+        window.location.href = defaultPage;
+      }
     }
-  }
-</script>
-  <div class="members-container">
-    <h2>Recommended Diet Plans</h2>
+  </script>
 
+  <!-- Heading -->
+  <div class="main-heading">
+    <h1>Diet Plans</h1>
+    <p>Healthy meal recommendations for your fitness goals</p>
+  </div>
+
+  <!-- Diet Cards -->
+  <div class="diet-container">
+
+    <!-- Muscle Gain -->
     <div class="diet-card">
-      <h3>Muscle Gain</h3>
+      <h2>💪 Muscle Gain</h2>
       <ul>
-        <li>Meal 1: Eggs, Brown Bread, Peanut Butter</li>
-        <li>Meal 2: Protein Shake + Banana</li>
-        <li>Meal 3: Chicken Breast + Rice + Salad</li>
-        <li>Meal 4: Dry Fruits + Milk</li>
+        <li>🥚 Eggs, Brown Bread & Peanut Butter</li>
+        <li>🍌 Protein Shake + Banana</li>
+        <li>🍗 Chicken Breast + Rice + Salad</li>
+        <li>🥛 Dry Fruits + Milk</li>
       </ul>
     </div>
 
+    <!-- Fat Loss -->
     <div class="diet-card">
-      <h3>Fat Loss</h3>
+      <h2>🔥 Fat Loss</h2>
       <ul>
-        <li>Meal 1: Boiled Eggs + Green Tea</li>
-        <li>Meal 2: Oats + Berries</li>
-        <li>Meal 3: Grilled Fish + Veggies</li>
-        <li>Meal 4: Black Coffee + Nuts</li>
+        <li>🥚 Boiled Eggs + Green Tea</li>
+        <li>🥣 Oats + Berries</li>
+        <li>🐟 Grilled Fish + Veggies</li>
+        <li>☕ Black Coffee + Nuts</li>
       </ul>
     </div>
 
+    <!-- Fitness -->
     <div class="diet-card">
-      <h3>General Fitness</h3>
+      <h2>🏋 General Fitness</h2>
       <ul>
-        <li>Meal 1: Smoothie Bowl + Chia Seeds</li>
-        <li>Meal 2: Mixed Fruits + Yogurt</li>
-        <li>Meal 3: Chapati + Dal + Veggies</li>
-        <li>Meal 4: Milk + Nuts</li>
+        <li>🥤 Smoothie Bowl + Chia Seeds</li>
+        <li>🍎 Mixed Fruits + Yogurt</li>
+        <li>🍛 Chapati + Dal + Veggies</li>
+        <li>🥛 Milk + Nuts</li>
       </ul>
     </div>
 
   </div>
+
 </body>
 </html>

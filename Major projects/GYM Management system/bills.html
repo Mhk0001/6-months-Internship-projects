@@ -1,192 +1,291 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Manage Bills</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
 
-  <script>
-    if (localStorage.getItem('isLoggedIn') !== 'true') {
-      alert('Please login first!');
-      window.location.href = 'login.html';
-    }
-  </script>
-
-  <div class="members-container">
-    <h2>Generate New Bill</h2>
-
-    <form id="bill-form">
-      <input type="text" id="bill-member" placeholder="Member Name" required />
-      <input type="number" id="bill-amount" placeholder="Amount (₹)" required />
-      <button type="submit">Generate Bill</button>
-    </form>
-
-    <h3>Generated Bills</h3>
-    <ul id="bill-list"></ul>
-
-    <button onclick="clearBills()" class="logout-btn">Clear All Bills</button>
-  </div>
-
-  Make sure path is correct -->
-  <!-- <script src="js/bills.js"></script>
-</body>
-</html> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Manage Bills</title>
 
   <style>
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    height: 100vh;
-    background: linear-gradient(135deg, #0f0f0f, #1a0000);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  }
 
-  /* 🔴 Background design elements */
-  body::before,
-  body::after {
-    content: "";
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    background: rgba(255, 0, 0, 0.2);
-    filter: blur(120px);
-    border-radius: 50%;
-    z-index: 0;
-  }
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, sans-serif;
+    }
 
-  body::before {
-    top: -50px;
-    left: -50px;
-  }
+    body{
+      min-height:100vh;
+      background: linear-gradient(135deg,#111,#1a1a1a,#2b0000);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+      overflow-x:hidden;
+      color:white;
+    }
 
-  body::after {
-    bottom: -50px;
-    right: -50px;
-  }
+    /* Background Glow */
+    body::before,
+    body::after{
+      content:"";
+      position:absolute;
+      width:300px;
+      height:300px;
+      background: rgba(255,0,0,0.2);
+      filter: blur(120px);
+      border-radius:50%;
+      z-index:0;
+    }
 
-  .container {
-    position: relative;
-    z-index: 1;
-    width: 400px;
-    background: #ffffff;
-    color: #111;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 0 25px rgba(255, 0, 0, 0.25);
-  }
+    body::before{
+      top:-80px;
+      left:-80px;
+    }
 
-  h2, h3 {
-    text-align: center;
-    margin-bottom: 15px;
-  }
+    body::after{
+      bottom:-80px;
+      right:-80px;
+    }
 
-  input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    transition: 0.3s;
-  }
+    /* Back Button */
+    .back-btn{
+      position: fixed;
+      top: 20px;
+      left: 20px;
 
-  input:focus {
-    border-color: #e60000;
-    box-shadow: 0 0 6px rgba(230, 0, 0, 0.5);
-    outline: none;
-  }
+      width:45px;
+      height:45px;
 
-  button {
-    width: 100%;
-    padding: 10px;
-    background: #e60000;
-    border: none;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-    margin-top: 10px;
-  }
+      border:none;
+      border-radius:50%;
 
-  button:hover {
-    background: #b30000;
-  }
+      background:#ff1a1a;
+      color:white;
 
-  ul {
-    list-style: none;
-    padding: 0;
-  }
+      font-size:22px;
+      cursor:pointer;
 
-  li {
-    background: #f5f5f5;
-    margin: 8px 0;
-    padding: 10px;
-    border-radius: 6px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+      display:flex;
+      align-items:center;
+      justify-content:center;
 
-  li button {
-    width: auto;
-    padding: 5px 10px;
-    background: black;
-    font-size: 12px;
-  }
+      box-shadow:0 0 15px rgba(255,0,0,0.7);
 
-  li button:hover {
-    background: #333;
-  }
+      transition:0.3s;
+      z-index:999;
+    }
 
-  .clear-btn {
-    background: black;
-  }
+    .back-btn:hover{
+      transform:scale(1.1);
+      background:#ff3333;
+    }
 
-  .clear-btn:hover {
-    background: #333;
-  }
-  .back-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
+    /* Main Container */
+    .container{
+      position:relative;
+      z-index:1;
 
-  width: 45px;
-  height: 45px;
+      width:100%;
+      max-width:500px;
 
-  background: #e60000;   /* bright red */
-  color: white;
-  border: none;
+      background: rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.1);
 
-  border-radius: 50%;
-  cursor: pointer;
+      backdrop-filter: blur(12px);
 
-  font-size: 20px;
-  font-weight: bold;
+      border-radius:20px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+      padding:30px;
 
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+      box-shadow:0 0 25px rgba(0,0,0,0.4);
+    }
 
-  z-index: 9999;
-}
-</style>
+    /* Heading */
+    .container h2{
+      text-align:center;
+      font-size:34px;
+      margin-bottom:10px;
+      color:#ff4d4d;
+    }
+
+    .subtitle{
+      text-align:center;
+      color:#ccc;
+      margin-bottom:30px;
+    }
+
+    /* Inputs */
+    .input-group{
+      margin-bottom:18px;
+    }
+
+    .input-group input{
+      width:100%;
+      padding:14px;
+
+      border:none;
+      outline:none;
+
+      border-radius:12px;
+
+      background: rgba(255,255,255,0.08);
+      color:white;
+
+      font-size:15px;
+
+      border:1px solid rgba(255,255,255,0.1);
+
+      transition:0.3s;
+    }
+
+    .input-group input:focus{
+      border-color:#ff1a1a;
+      box-shadow:0 0 10px rgba(255,0,0,0.4);
+    }
+
+    .input-group input::placeholder{
+      color:#bbb;
+    }
+
+    /* Buttons */
+    .main-btn{
+      width:100%;
+      padding:14px;
+
+      border:none;
+      border-radius:12px;
+
+      background:#ff1a1a;
+      color:white;
+
+      font-size:16px;
+      font-weight:bold;
+
+      cursor:pointer;
+
+      transition:0.3s;
+    }
+
+    .main-btn:hover{
+      background:#cc0000;
+      transform:translateY(-2px);
+    }
+
+    /* Bills Section */
+    .bills-section{
+      margin-top:35px;
+    }
+
+    .bills-section h3{
+      margin-bottom:20px;
+      color:#fff;
+      text-align:center;
+    }
+
+    /* Bill Cards */
+    #bill-list{
+      list-style:none;
+    }
+
+    #bill-list li{
+      background: rgba(255,255,255,0.07);
+
+      border:1px solid rgba(255,255,255,0.08);
+
+      padding:15px;
+      margin-bottom:15px;
+
+      border-radius:14px;
+
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+
+      transition:0.3s;
+    }
+
+    #bill-list li:hover{
+      transform:translateY(-3px);
+      box-shadow:0 0 15px rgba(255,0,0,0.2);
+    }
+
+    .bill-info{
+      line-height:1.5;
+    }
+
+    .member-name{
+      font-size:16px;
+      font-weight:bold;
+    }
+
+    .bill-amount{
+      color:#ff4d4d;
+      font-size:15px;
+    }
+
+    /* Delete Button */
+    .delete-btn{
+      background:#111;
+      color:white;
+
+      border:none;
+      padding:8px 14px;
+
+      border-radius:8px;
+
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .delete-btn:hover{
+      background:#333;
+    }
+
+    /* Clear Button */
+    .clear-btn{
+      width:100%;
+      margin-top:20px;
+
+      background:#111;
+    }
+
+    .clear-btn:hover{
+      background:#333;
+    }
+
+    /* Responsive */
+    @media(max-width:600px){
+
+      .container{
+        padding:22px;
+      }
+
+      .container h2{
+        font-size:28px;
+      }
+
+      #bill-list li{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
+      }
+
+      .delete-btn{
+        width:100%;
+      }
+    }
+
+  </style>
 </head>
 
 <body>
- <button class="back-btn" onclick="goBack()">←</button>
 
-  <!-- LOGIN CHECK -->
+  <!-- Back Button -->
+  <button class="back-btn" onclick="goBack()">←</button>
+
+  <!-- Login Check -->
   <script>
     if (localStorage.getItem('isLoggedIn') !== 'true') {
       alert('Please login first!');
@@ -194,84 +293,181 @@
     }
   </script>
 
+  <!-- Main Container -->
   <div class="container">
-    <h2>Generate Bill</h2>
 
+    <h2>Manage Bills</h2>
+    <p class="subtitle">Generate and manage gym member bills</p>
+
+    <!-- Form -->
     <form id="bill-form">
-      <input type="text" id="bill-member" placeholder="Member Name" required />
-      <input type="number" id="bill-amount" placeholder="Amount (₹)" required />
-      <button type="submit">Generate Bill</button>
+
+      <div class="input-group">
+        <input
+          type="text"
+          id="bill-member"
+          placeholder="Enter Member Name"
+          required
+        />
+      </div>
+
+      <div class="input-group">
+        <input
+          type="number"
+          id="bill-amount"
+          placeholder="Enter Amount (₹)"
+          required
+        />
+      </div>
+
+      <button type="submit" class="main-btn">
+        Generate Bill
+      </button>
+
     </form>
 
-    <h3>Generated Bills</h3>
-    <ul id="bill-list"></ul>
+    <!-- Bills -->
+    <div class="bills-section">
 
-    <button onclick="clearBills()" class="clear-btn">Clear All Bills</button>
+      <h3>Generated Bills</h3>
+
+      <ul id="bill-list"></ul>
+
+      <button onclick="clearBills()" class="main-btn clear-btn">
+        Clear All Bills
+      </button>
+
+    </div>
+
   </div>
 
+  <!-- Firebase Script -->
   <script type="module">
+
     import { db } from "./firebase.js";
-    import { collection, addDoc, getDocs, deleteDoc, doc } 
+
+    import {
+      collection,
+      addDoc,
+      getDocs,
+      deleteDoc,
+      doc
+    }
     from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const form = document.getElementById("bill-form");
     const list = document.getElementById("bill-list");
 
     form.addEventListener("submit", async (e) => {
+
       e.preventDefault();
 
-      const name = document.getElementById("bill-member").value;
-      const amount = document.getElementById("bill-amount").value;
+      const name =
+      document.getElementById("bill-member").value;
 
-      await addDoc(collection(db, "bills"), { name, amount });
+      const amount =
+      document.getElementById("bill-amount").value;
+
+      await addDoc(collection(db, "bills"), {
+        name,
+        amount
+      });
 
       form.reset();
+
       loadBills();
     });
 
-    async function loadBills() {
+    async function loadBills(){
+
       list.innerHTML = "";
 
-      const snapshot = await getDocs(collection(db, "bills"));
+      const snapshot =
+      await getDocs(collection(db, "bills"));
 
       snapshot.forEach((docSnap) => {
-        const li = document.createElement("li");
+
+        const li =
+        document.createElement("li");
 
         li.innerHTML = `
-          <span>${docSnap.data().name} - ₹${docSnap.data().amount}</span>
+
+          <div class="bill-info">
+
+            <div class="member-name">
+              ${docSnap.data().name}
+            </div>
+
+            <div class="bill-amount">
+              ₹${docSnap.data().amount}
+            </div>
+
+          </div>
+
         `;
 
-        const btn = document.createElement("button");
+        const btn =
+        document.createElement("button");
+
         btn.textContent = "Delete";
 
+        btn.classList.add("delete-btn");
+
         btn.onclick = async () => {
-          await deleteDoc(doc(db, "bills", docSnap.id));
+
+          await deleteDoc(
+            doc(db, "bills", docSnap.id)
+          );
+
           loadBills();
         };
 
         li.appendChild(btn);
+
         list.appendChild(li);
+
       });
     }
 
     window.clearBills = async () => {
-      const snapshot = await getDocs(collection(db, "bills"));
+
+      const snapshot =
+      await getDocs(collection(db, "bills"));
+
       snapshot.forEach(async (d) => {
-        await deleteDoc(doc(db, "bills", d.id));
+
+        await deleteDoc(
+          doc(db, "bills", d.id)
+        );
+
       });
+
       loadBills();
     };
 
     loadBills();
+
   </script>
-<script>
-  function goBack() {
-    if (document.referrer && document.referrer !== "") {
-      window.history.back();
-    } else {
-      window.location.href = "dashboard.html"; // fallback
+
+  <!-- Back Function -->
+  <script>
+
+    function goBack(){
+
+      if(document.referrer &&
+         document.referrer !== ""){
+
+        window.history.back();
+
+      } else {
+
+        window.location.href =
+        "dashboard.html";
+
+      }
     }
-  }
-</script>
+
+  </script>
+
 </body>
 </html>
