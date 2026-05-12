@@ -10,7 +10,7 @@ The projects are categorized into **Minor Projects** and **Major Projects**.
 ## Minor Projects
 - Basic Calculator
 - Recipe Book
-- Spotify Clone
+- Music player
 - Memory Card Game
 - To-Do List App
 
@@ -58,7 +58,7 @@ A recipe management application to view and explore different recipes.
 
 ---
 
-## 3. Spotify Clone
+## 3. Music Player
 A music player UI inspired by Spotify.
 
 ### Features
