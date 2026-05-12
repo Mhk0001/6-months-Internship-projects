@@ -1,0 +1,241 @@
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.todolist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #808080;
+  width: 40vw;
+  border-radius: 5px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+}
+.borderBottom { border-bottom: 1px solid #ccc; }
+::-webkit-input-placeholder { font-style: italic; }
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.todoForm { width: 100%; }
+
+.input {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+}
+
+.listInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.inputButton {
+  background-color: white;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  padding-right: 18px;
+}
+
+.inputEntry {
+  display: flex;
+  width: 50%;
+  gap: 20px;
+}
+
+.clear {
+  padding: 10px;
+  background-color: whitesmoke;
+}
+
+.clearBtn {
+  width: 100%;
+  font-size: 16px;
+  border: none;
+  background-color: whitesmoke;
+}
+
+.hide { display: none; }
+
+#editInput {
+  border: none;
+  outline: none;
+}
+
+#editInput:focus {
+  border: none;
+  outline: none;
+}
+
+.completed {
+  text-decoration: line-through;
+} */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  font-family: Arial, sans-serif;
+}
+
+
+/* Main Card */
+.todolist {
+  background: #fff;
+  width: 420px;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: #f7f7f7;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.borderBottom {
+  border-bottom: 1px solid #ddd;
+}
+
+/* Input Area */
+.todoForm {
+  width: 100%;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+}
+
+.listInput {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.listInput:focus {
+  border-color: #667eea;
+}
+
+/* Add Button */
+.inputButton {
+  margin-left: 10px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  background: #667eea;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.inputButton:hover {
+  background: #5a67d8;
+}
+
+/* List */
+.list {
+  list-style: none;
+}
+
+/* Single Item */
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+  transition: 0.3s;
+}
+
+.listItem:hover {
+  background: #f9f9f9;
+}
+
+/* Left part */
+.inputEntry {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Completed task */
+.completed {
+  text-decoration: line-through;
+  color: #999;
+}
+
+/* Clear button */
+.clear {
+  background: #f7f7f7;
+}
+
+.clearBtn {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #444;
+  transition: 0.3s;
+}
+
+.clearBtn:hover {
+  background: #eaeaea;
+}
+
+/* Edit input */
+#editInput {
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+/* Utility */
+.hide {
+  display: none;
+}

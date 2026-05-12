@@ -1,0 +1,142 @@
+/* Container for the shop section */
+.shop-section {
+  padding: 40px;
+  background-color: var(--background-color);
+}
+
+/* Title styling */
+h2 {
+  text-align: center;
+  font-size: 2rem;
+  color:var(--text-color);
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+/* Grid layout for the product list */
+.shop-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+/* Each product card */
+.shop-item {
+  background-color: var(--card-bg-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  overflow: hidden;
+  transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+  max-width: 100%;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Hover effect on product cards */
+.shop-item:hover {
+  transform: var(--hover-transform);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Product image */
+.shop-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  border-radius: 10px 10px 0 0;
+}
+
+/* Product title */
+h3 {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Product description */
+p {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  margin-bottom: 15px;
+  padding: 0 10px;
+  line-height: 1.5;
+}
+
+/* Price styling */
+.shop-item .price {
+  font-size: 1.1rem;
+  color: var(--secondary-color);
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Button for each product (if needed) */
+.shop-item .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color var(--transition-duration) ease;
+}
+
+.shop-item .btn:hover {
+  background-color: var(--accent-color);
+}
+.shop-group {
+  margin-bottom: 40px;
+}
+
+.shop-heading {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #222;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 6px;
+}
+
+.shop-products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.product-card {
+  background: #fff;
+  width: 220px;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.price {
+  font-weight: bold;
+  margin-top: 5px;
+}
+.product-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.product-buttons button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.product-buttons button:hover {
+  opacity: 0.9;
+}
