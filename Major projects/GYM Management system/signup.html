@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h2 style="text-align:center;">Create Account</h2>
+
+  <form id="signup-form">
+    <input type="text" id="name" placeholder="Full Name" required />
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <button type="submit">Sign Up</button>
+  </form>
+
+  <script>
+    document.getElementById('signup-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+
+      // Check if user already exists
+      const existing = users.find(u => u.email === email);
+      if (existing) {
+        alert('Account already exists!');
+        return;
+      }
+
+      const newUser = { name, email, password };
+      users.push(newUser);
+      localStorage.setItem('users', JSON.stringify(users));
+
+      alert('Account created successfully!');
+      window.location.href = 'login.html';
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+
+   .back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+
+  width: 45px;
+  height: 45px;
+
+  background: #e60000;   /* bright red */
+  color: white;
+  border: none;
+
+  border-radius: 50%;
+  cursor: pointer;
+
+  font-size: 20px;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+
+  z-index: 9999;
+}
+  </style>
+</head>
+<body>
+  <button class="back-btn" onclick="goBack('index.html')">←</button>
+
+  <script>
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const user = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (isLoggedIn !== 'true' || !user) {
+      alert('Please login first!');
+      window.location.href = 'login.html';
+    }
+  </script>
+  <script>
+  function goBack(defaultPage) {
+    if (document.referrer && document.referrer !== "") {
+      window.history.back();
+    } else {
+      window.location.href = defaultPage;
+    }
+  }
+</script>
+
+  <div class="dashboard-container">
+    <h1>Welcome, <span id="username"></span></h1>
+
+    <div class="dashboard-links">
+      <a href="members.html" class="card">👥 Manage Members</a>
+      <a href="bills.html" class="card">💳 Manage Bills</a>
+      <a href="diet.html" class="card">🥗 Diet Plans</a>
+      <a href="supplements.html" class="card">💊 Supplements</a>
+      <a href="index.html" class="card">🏠 Home</a>
+    </div>
+
+    <button onclick="logout()" class="logout-btn">Logout</button>
+  </div>
+
+  <script>
+    const loggedIn = JSON.parse(localStorage.getItem('loggedInUser'));
+    document.getElementById('username').innerText = loggedIn ? loggedIn.name : '';
+
+    function logout() {
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('loggedInUser');
+      window.location.href = 'login.html';
+    }
+  </script>
+  
+
+</body>
+</html>

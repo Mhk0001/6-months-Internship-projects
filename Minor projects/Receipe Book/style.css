@@ -1,0 +1,137 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+    text-align: center;
+    margin: 0;
+}
+
+/* HEADER */
+h1 {
+    background: linear-gradient(90deg, #ff6f61, #ffb74d);
+    color: white;
+    padding: 18px;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+/* FORM CONTAINER */
+.form-container {
+    background: #ffffff;
+    padding: 25px;
+    margin: 25px auto;
+    width: 60%;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+/* INPUT FIELDS */
+input, textarea {
+    width: 90%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+input:focus, textarea:focus {
+    border-color: #ff7043;
+}
+
+/* BUTTON */
+button {
+    padding: 12px 22px;
+    background: linear-gradient(90deg, #ff7043, #ff9800);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(90deg, #e64a19, #f57c00);
+}
+
+/* RECIPE LIST */
+.recipe-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* RECIPE CARD */
+.recipe-card {
+    background: white;
+    width: 250px;
+    margin: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+}
+
+/* IMAGE */
+.recipe-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* DETAILS */
+.details-container {
+    background: white;
+    width: 60%;
+    margin: 25px auto;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+/* MODAL BACKGROUND */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.65);
+}
+
+/* MODAL BOX */
+.modal-content {
+    background: #fff;
+    width: 40%;
+    max-width: 450px;
+    margin: 8% auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* CLOSE BUTTON */
+.close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 26px;
+    color: #ff7043;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #e64a19;
+}

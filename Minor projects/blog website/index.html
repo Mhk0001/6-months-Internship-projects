@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<!-- IMPORTANT FOR FULL SCREEN -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Modern Blog Website</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <h1>✨ My Blog</h1>
+    <nav>
+        <a href="#post1">Technology</a>
+        <a href="#post2">Fitness</a>
+        <a href="#post3">Travel</a>
+    </nav>
+</header>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <h2>Welcome to My Blog Website</h2>
+    <p>Ideas • Learning • Experiences</p>
+</section>
+
+<!-- MAIN CONTAINER -->
+<div class="container">
+
+    <!-- POST 1 -->
+    <div class="card" id="post1">
+        <img src="https://picsum.photos/1200/500?tech">
+        <div class="content">
+            <h2>Future of Technology</h2>
+            <span>📅 March 10, 2026</span>
+            <p>
+                Technology is evolving rapidly with AI, automation,
+                and modern web applications changing our world.
+            </p>
+
+            <div class="comments-box">
+                <h3>Comments</h3>
+                <input class="name" placeholder="Your Name">
+                <textarea class="message" placeholder="Write comment..."></textarea>
+                <button onclick="addComment(this)">Post Comment</button>
+                <ul class="comments"></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- POST 2 -->
+    <div class="card" id="post2">
+        <img src="https://picsum.photos/1200/500?fitness">
+        <div class="content">
+            <h2>Importance of Fitness</h2>
+            <span>📅 March 12, 2026</span>
+            <p>
+                Fitness improves mental strength, health, and daily
+                productivity. A healthy body builds a healthy mind.
+            </p>
+
+            <div class="comments-box">
+                <h3>Comments</h3>
+                <input class="name" placeholder="Your Name">
+                <textarea class="message" placeholder="Write comment..."></textarea>
+                <button onclick="addComment(this)">Post Comment</button>
+                <ul class="comments"></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- POST 3 -->
+    <div class="card" id="post3">
+        <img src="https://picsum.photos/1200/500?travel">
+        <div class="content">
+            <h2>Travel Experience</h2>
+            <span>📅 March 15, 2026</span>
+            <p>
+                Traveling helps explore cultures, discover new places,
+                and create unforgettable memories.
+            </p>
+
+            <div class="comments-box">
+                <h3>Comments</h3>
+                <input class="name" placeholder="Your Name">
+                <textarea class="message" placeholder="Write comment..."></textarea>
+                <button onclick="addComment(this)">Post Comment</button>
+                <ul class="comments"></ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

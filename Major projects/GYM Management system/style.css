@@ -1,0 +1,315 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* body {
+  font-family: "Nunito", sans-serif;
+  background-color: #000;
+  color: white;
+  padding: 20px;
+} */
+body {
+  font-family: "Nunito", sans-serif;
+  color: white;
+  padding: 20px;
+
+  /* 🔴 Improved background (no layout change) */
+  background: linear-gradient(135deg, #000000, #1a0000);
+  position: relative;
+}
+
+/* 🔥 Logo watermark (center, subtle) */
+body::before {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 350px;
+  height: 350px;
+
+
+
+  transform: translate(-50%, -50%);
+  opacity: 0.05; /* very light */
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* 🔴 Soft red glow for depth */
+body::after {
+  content: "";
+  position: fixed;
+  width: 300px;
+  height: 300px;
+
+  background: rgba(255, 0, 0, 0.15);
+  filter: blur(120px);
+  border-radius: 50%;
+
+  top: 10%;
+  left: 10%;
+
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+.back-btn:hover {
+  background: red;
+}
+/* Navigation Bar */
+nav {
+  display: flex;
+  justify-content: end;
+  padding: 20px 0;
+}
+
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size:17px;
+  transition: 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: red;
+}
+
+/* Hero Section (Landing Page) */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 80px;
+  flex-wrap: wrap;
+}
+
+.hero-text {
+  max-width: 600px;
+}
+
+.hero-text h1 span {
+  font-size: 48px;
+  font-weight: 900;
+  color: #222;
+  -webkit-text-stroke: 1px white;
+}
+
+.hero-text h2 {
+  font-size: 42px;
+  margin: 20px 0;
+  font-weight: 900;
+}
+
+.btn {
+  background-color: red;
+  color: white;
+  padding: 12px 24px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 25px;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: darkred;
+}
+
+.hero-img img {
+  max-width: 500px;
+  width: 100%;
+}
+
+/* Forms and Input Fields */
+form {
+  margin:50px auto;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form input, form button {
+  padding: 10px;
+  margin: 10px 0;
+  width: 100%;
+  max-width: 300px;
+  border: none;
+  border-radius: 4px;
+}
+
+form button {
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Member and Bill List */
+ul#member-list, ul#bill-list {
+  list-style: none;
+  margin-top: 20px;
+}
+
+ul#member-list li, ul#bill-list li {
+  background: #222;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+.dashboard-container {
+  text-align: center;
+  padding: 40px;
+}
+
+.dashboard-container h1 {
+  margin-bottom: 40px;
+  font-size: 32px;
+}
+
+.dashboard-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.card {
+  background-color: #222;
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: background 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+}
+
+.card:hover {
+  background-color: red;
+  color: white;
+}
+
+.logout-btn {
+  background-color: darkred;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: red;
+}
+
+.members-container {
+  max-width: 600px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+#member-form input, #member-form button {
+  width: 100%;
+  max-width: 400px;
+}
+
+#member-list {
+  margin-top: 30px;
+  text-align: left;
+  padding-left: 0;
+}
+
+#member-list li {
+  background: #222;
+  margin-bottom: 10px;
+  padding: 12px;
+  border-radius: 6px;
+  list-style: none;
+}
+
+.diet-card {
+  background: #222;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 8px;
+  max-width: 600px;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+}
+
+.diet-card h3 {
+  margin-bottom: 10px;
+  color: red;
+}
+
+.diet-card ul {
+  list-style: square;
+  padding-left: 20px;
+}
+
+.diet-card ul li {
+  margin-bottom: 6px;
+}
+
+.supplements-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.supp-card {
+  background: #222;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  width: 200px;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.2);
+}
+
+.supp-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.supp-card h3 {
+  margin-bottom: 10px;
+}
+
+.supp-card p {
+  font-weight: bold;
+  color: red;
+}
+
+textarea {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin: 10px 0;
+  height: 100px;
+  resize: vertical;
+  border: none;
+  border-radius: 4px;
+  font-family: Arial;
+  font-size: 16px;
+}

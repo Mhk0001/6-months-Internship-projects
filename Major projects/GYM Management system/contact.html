@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="style.css" />
+ <style>
+
+   .back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+
+  width: 45px;
+  height: 45px;
+
+  background: #e60000;   /* bright red */
+  color: white;
+  border: none;
+
+  border-radius: 50%;
+  cursor: pointer;
+
+  font-size: 20px;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+
+  z-index: 9999;
+}
+  </style>
+</head>
+<body>
+<button class="back-btn" onclick="goBack('dashboard.html')">←</button>
+  <script>
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+      alert('Please login first!');
+      window.location.href = 'login.html';
+    }
+  </script>
+  <script>
+  function goBack(defaultPage) {
+    if (document.referrer && document.referrer !== "") {
+      window.history.back();
+    } else {
+      window.location.href = defaultPage;
+    }
+  }
+</script>
+
+  <div class="members-container">
+    <h2>Contact Us</h2>
+
+    <form id="contact-form">
+      <input type="text" id="contact-name" placeholder="Your Name" required />
+      <input type="email" id="contact-email" placeholder="Your Email" required />
+      <textarea id="contact-message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+
+    <p style="margin-top: 20px; color: lightgreen;" id="confirmation-msg"></p>
+  </div>
+
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('contact-name').value.trim();
+      const email = document.getElementById('contact-email').value.trim();
+      const message = document.getElementById('contact-message').value.trim();
+
+      const contact = { name, email, message, date: new Date().toLocaleString() };
+
+      let queries = JSON.parse(localStorage.getItem('contactQueries')) || [];
+      queries.push(contact);
+      localStorage.setItem('contactQueries', JSON.stringify(queries));
+
+      document.getElementById('contact-form').reset();
+      document.getElementById('confirmation-msg').textContent = "Thanks! We'll get back to you soon.";
+    });
+  </script>
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCKWyI4X-D6kMcnwialE_wBSv6IUSLefR0",
+  authDomain: "gym-web-9bd26.firebaseapp.com",
+  projectId: "gym-web-9bd26",
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  window.db = db; // global access
+</script>
+
+</body>
+</html>

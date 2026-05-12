@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe Book</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>My Recipe Book</h1>
+
+    <!-- Add Recipe Form -->
+    <div class="form-container">
+        <h2>Add New Recipe</h2>
+
+        <input type="text" id="name" placeholder="Recipe Name">
+
+        <textarea id="ingredients" placeholder="Ingredients (comma separated)"></textarea>
+
+        <textarea id="steps" placeholder="Preparation Steps"></textarea>
+
+        <input type="file" id="image">
+
+        <button onclick="addRecipe()">Add Recipe</button>
+       
+    </div>
+
+    <!-- Search -->
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Search recipe..." onkeyup="searchRecipe()">
+    </div>
+
+    <!-- Recipe List -->
+    <div id="recipeList" class="recipe-list"></div>
+    <div id="recipeDetails" class="details-container"></div>
+    <!-- Recipe Modal -->
+<div id="recipeModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div id="modalDetails"></div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

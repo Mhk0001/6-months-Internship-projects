@@ -1,0 +1,277 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Manage Bills</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <script>
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+      alert('Please login first!');
+      window.location.href = 'login.html';
+    }
+  </script>
+
+  <div class="members-container">
+    <h2>Generate New Bill</h2>
+
+    <form id="bill-form">
+      <input type="text" id="bill-member" placeholder="Member Name" required />
+      <input type="number" id="bill-amount" placeholder="Amount (₹)" required />
+      <button type="submit">Generate Bill</button>
+    </form>
+
+    <h3>Generated Bills</h3>
+    <ul id="bill-list"></ul>
+
+    <button onclick="clearBills()" class="logout-btn">Clear All Bills</button>
+  </div>
+
+  Make sure path is correct -->
+  <!-- <script src="js/bills.js"></script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Manage Bills</title>
+
+  <style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+    background: linear-gradient(135deg, #0f0f0f, #1a0000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  /* 🔴 Background design elements */
+  body::before,
+  body::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 0, 0, 0.2);
+    filter: blur(120px);
+    border-radius: 50%;
+    z-index: 0;
+  }
+
+  body::before {
+    top: -50px;
+    left: -50px;
+  }
+
+  body::after {
+    bottom: -50px;
+    right: -50px;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    width: 400px;
+    background: #ffffff;
+    color: #111;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.25);
+  }
+
+  h2, h3 {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: 0.3s;
+  }
+
+  input:focus {
+    border-color: #e60000;
+    box-shadow: 0 0 6px rgba(230, 0, 0, 0.5);
+    outline: none;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    background: #e60000;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+  }
+
+  button:hover {
+    background: #b30000;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    background: #f5f5f5;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  li button {
+    width: auto;
+    padding: 5px 10px;
+    background: black;
+    font-size: 12px;
+  }
+
+  li button:hover {
+    background: #333;
+  }
+
+  .clear-btn {
+    background: black;
+  }
+
+  .clear-btn:hover {
+    background: #333;
+  }
+  .back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+
+  width: 45px;
+  height: 45px;
+
+  background: #e60000;   /* bright red */
+  color: white;
+  border: none;
+
+  border-radius: 50%;
+  cursor: pointer;
+
+  font-size: 20px;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+
+  z-index: 9999;
+}
+</style>
+</head>
+
+<body>
+ <button class="back-btn" onclick="goBack()">←</button>
+
+  <!-- LOGIN CHECK -->
+  <script>
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+      alert('Please login first!');
+      window.location.href = 'login.html';
+    }
+  </script>
+
+  <div class="container">
+    <h2>Generate Bill</h2>
+
+    <form id="bill-form">
+      <input type="text" id="bill-member" placeholder="Member Name" required />
+      <input type="number" id="bill-amount" placeholder="Amount (₹)" required />
+      <button type="submit">Generate Bill</button>
+    </form>
+
+    <h3>Generated Bills</h3>
+    <ul id="bill-list"></ul>
+
+    <button onclick="clearBills()" class="clear-btn">Clear All Bills</button>
+  </div>
+
+  <script type="module">
+    import { db } from "./firebase.js";
+    import { collection, addDoc, getDocs, deleteDoc, doc } 
+    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const form = document.getElementById("bill-form");
+    const list = document.getElementById("bill-list");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("bill-member").value;
+      const amount = document.getElementById("bill-amount").value;
+
+      await addDoc(collection(db, "bills"), { name, amount });
+
+      form.reset();
+      loadBills();
+    });
+
+    async function loadBills() {
+      list.innerHTML = "";
+
+      const snapshot = await getDocs(collection(db, "bills"));
+
+      snapshot.forEach((docSnap) => {
+        const li = document.createElement("li");
+
+        li.innerHTML = `
+          <span>${docSnap.data().name} - ₹${docSnap.data().amount}</span>
+        `;
+
+        const btn = document.createElement("button");
+        btn.textContent = "Delete";
+
+        btn.onclick = async () => {
+          await deleteDoc(doc(db, "bills", docSnap.id));
+          loadBills();
+        };
+
+        li.appendChild(btn);
+        list.appendChild(li);
+      });
+    }
+
+    window.clearBills = async () => {
+      const snapshot = await getDocs(collection(db, "bills"));
+      snapshot.forEach(async (d) => {
+        await deleteDoc(doc(db, "bills", d.id));
+      });
+      loadBills();
+    };
+
+    loadBills();
+  </script>
+<script>
+  function goBack() {
+    if (document.referrer && document.referrer !== "") {
+      window.history.back();
+    } else {
+      window.location.href = "dashboard.html"; // fallback
+    }
+  }
+</script>
+</body>
+</html>
